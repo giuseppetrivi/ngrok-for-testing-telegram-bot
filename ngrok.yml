@@ -1,0 +1,3 @@
+version: "2"
+authtoken: <YOUR NGROK AUTH TOKEN>
+region: "us"
