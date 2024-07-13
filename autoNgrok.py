@@ -50,8 +50,7 @@ if (not webhook.isUrlValid(ngrokPublicUrl)):
   exit(1)
 
 
-ngrokPublicUrlComplete = ngrokPublicUrl + localFolderUri
-
+ngrokPublicUrlForWebhook = ngrokPublicUrl + localFolderUri
 # Operations to reset the webhook: delete the pre-existent, setting the new one and getting info of the new one)
 # Deleting the pre-existent webhook
 dwInfo = webhook.deleteWebhook()
@@ -62,9 +61,8 @@ else:
   print("[!! ERROR]: Something wrong while deleting the webhook.")
   exit(1)
 
-print(ngrokPublicUrlComplete)
 # Setting the new one (with ngrok public url)
-swInfo = webhook.setWebhook(ngrokPublicUrlComplete)
+swInfo = webhook.setWebhook(ngrokPublicUrlForWebhook)
 if (swInfo):
   print("## Set new webhook ##")
   print(json.dumps(swInfo, indent=2))
@@ -84,7 +82,8 @@ else:
 
 # Print info about ngrok tunnel
 print()
-print("Info about the ngrok tunnel\n")
+print()
+print("Info about the ngrok tunnel")
 print(f"\tPublic URL: {ngrokPublicUrl}")
 print(f"\tProtocol: {protocol}")
 print(f"\tTunnel name: {name}")
