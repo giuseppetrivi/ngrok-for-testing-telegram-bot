@@ -1,5 +1,5 @@
 # ngrok-for-testing-telegram-bot
-### Prerequisite to start the script
+### Prerequisites to start the script
 - [Download Python](https://www.python.org/downloads/)
 - [Download ngrok](https://ngrok.com/download), register to it and do the step 2 [here](https://ngrok.com/docs/getting-started/)
 - [Download Python library "pyngrok"](https://pypi.org/project/pyngrok/)
