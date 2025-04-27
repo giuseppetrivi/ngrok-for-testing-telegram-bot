@@ -1,2 +1,4 @@
-./amzbot-local-stert.bat
-./ngrok-bot-start.bat
+amzbot-local-start.bat
+ngrok-bot-start.bat
+
+base_config.json
