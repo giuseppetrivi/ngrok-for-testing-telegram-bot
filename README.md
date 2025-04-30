@@ -10,7 +10,7 @@ Article about it [here](https://giuseppetrivi.github.io/posts/testare-bot-telegr
 ---
 ### Prerequisites to start the script
 This are all the (easy and common) prerequisites to start the script:
-- Create a base Telegram bot ([tutorial here](https://core.telegram.org/bots/tutorial)
+- Create a base Telegram bot ([tutorial here](https://core.telegram.org/bots/tutorial))
 - Clone locally the repository (`git clone LINK_TO_THIS_REPO`)
 - [Download Python](https://www.python.org/downloads/)
 - [Register to ngrok](https://dashboard.ngrok.com/signup)
@@ -20,15 +20,17 @@ This are all the (easy and common) prerequisites to start the script:
 
 ---
 ### How does it work?
-After fulfilling the above prerequisites, you need to place the `ngrok.yml` file in the ngrok configuration folder, which may vary depending on the OS on which it is installed [info here](https://ngrok.com/docs/agent/config/). Then you need to insert the path to the file on line 47 of `auto_ngrok.py`:
-```python
+After fulfilling the above prerequisites, you need to place the `ngrok.yml` file in the ngrok configuration folder, which may vary depending on the OS on which it is installed ([info here](https://ngrok.com/docs/agent/config/)). Then you need to insert the path to the file on line 47 of `auto_ngrok.py`:
+```py
 ...
+
 ngrok_config_file_path = "Here/The/Path/ngrok.yml"   # Change this with the default folder path of ngrok.yml file
+
 ...
 ```
 
 Now you can use this script, executing it into the command line:
-```bash
+```sh
 py auto_ngrok.py ...
 ```
 
@@ -42,21 +44,15 @@ If you use a `-c`, the other parameters will be taken from the configuration fil
 ### Configuration file
 You can create custom configuration files with the following structure:
 ```json
-crypto_bot_config.json=>
-
 {
   "ngrok_config_file_path": "C:/path/to/ngrok/config/folder/ngrok.yml",
   "local_folder_path": "/crypto_bot_project/index.php",
   "telegram_bot_token": "238423979837589fwe8ydys7s7tyr78"
 }
+```
 
-
-personal_bot_config.json=>
-
-{
-  "ngrok_config_file_path": "C:/path/to/ngrok/config/folder/ngrok.yml",
-  "local_folder_path": "/personal_bot_project/index.php",
-  "telegram_bot_token": "89795876938fdf8s7s8sts7trt8sr9"
-}
+And then use it:
+```sh
+py auto_ngrok.py -c crypto_bot_config
 ```
 
