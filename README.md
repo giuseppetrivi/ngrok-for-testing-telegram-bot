@@ -39,6 +39,7 @@ The script accepts the following arguments on the command line:
 
 If you use a `-c`, the other parameters will be taken from the configuration file. Otherwise yu need to specify `-f` and `-t`.
 
+---
 ### Configuration file
 You can create custom configuration files with the following structure:
 ```json
