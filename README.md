@@ -1,43 +1,50 @@
 # ngrok-for-testing-telegram-bot
 
 ### What is this script
-To develop/test a Telegram bot you need to set a Webhook (by the API) that point to a file on the web.
-So you can't develop a Telegram bot locally, unless you safely publish your local folder to the web.
-[**ngrok**](https://ngrok.com/) allows you to make available your localhost on the web. Putting your localhost on the web, ngrok provides you the created domain and, by that domain, you can create the Telegram bot webhook. This script simply allows you to automate the process of creating the ngrok tunnel and deleting the webhook to create the new one every time you start ngrok.
+To develop or test a Telegram bot, you need to set a Webhook (via the Telegram API) that points to a publicly accessible file on the web.  
+This means you can't develop a Telegram bot locally unless you expose your local folder to the web securely.
 
-Article about it [here](https://giuseppetrivi.github.io/posts/testare-bot-telegram-in-locale-con-ngrok/) (in italian, translate it via browser translation).
+[**ngrok**](https://ngrok.com/) allows you to expose your localhost to the internet. It provides a temporary public domain pointing to your local server, which you can use to set up your bot's Webhook.  
+This script automates the process of creating an ngrok tunnel and updating the Telegram Webhook accordingly each time ngrok is started.
+
+Related article (in Italian) [here](https://giuseppetrivi.github.io/posts/testare-bot-telegram-in-locale-con-ngrok/) (use browser translation if needed).
 
 ---
-### Prerequisites to start the script
-This are all the (easy and common) prerequisites to start the script:
+
+### Prerequisites
+These are all the (easy and common) prerequisites to run the script:
+
 - Create a base Telegram bot ([tutorial here](https://core.telegram.org/bots/tutorial))
-- Clone locally the repository (`git clone LINK_TO_THIS_REPO`)
-- [Download Python](https://www.python.org/downloads/)
-- [Register to ngrok](https://dashboard.ngrok.com/signup)
-- [Download ngrok](https://ngrok.com/download) (step 1 and 2 [here](https://ngrok.com/docs/getting-started/))
-- [Download Python library "pyngrok"](https://pypi.org/project/pyngrok/)
-- Download a local server (like [XAMPP](https://www.apachefriends.org/it/index.html))
+- Clone this repository locally (`git clone LINK_TO_THIS_REPO`)
+- [Install Python](https://www.python.org/downloads/)
+- [Register for ngrok](https://dashboard.ngrok.com/signup)
+- [Download ngrok](https://ngrok.com/download) (see steps 1 and 2 [here](https://ngrok.com/docs/getting-started/))
+- [Install the `pyngrok` Python library](https://pypi.org/project/pyngrok/)
+- Install a local server (like [XAMPP](https://www.apachefriends.org/it/index.html))
 
 ---
+
 ### How it works
-After fulfilling the above prerequisites, you need to place the `ngrok.yml` file in the ngrok configuration folder, which may vary depending on the OS on which it is installed ([info here](https://ngrok.com/docs/agent/config/)). Then you need to insert the path to the file on line 47 of `auto_ngrok.py`:
+Once the prerequisites are met, place the `ngrok.yml` configuration file in the ngrok config folder (its location depends on your OS — [more info here](https://ngrok.com/docs/agent/config/)).
+
+Then, specify the path to that config file on line 47 of `auto_ngrok.py`:
 ```py
 ...
-ngrok_config_file_path = "Here/The/Path/ngrok.yml" 
+ngrok_config_file_path = "/Here/The/Path/ngrok.yml"
 ...
 ```
 
-Now you can use this script, executing it into the command line:
+Now you can run the script from the command line:
 ```sh
 py auto_ngrok.py ...
 ```
 
-The script accepts the following arguments on the command line:
-- `-f LOCAL_FOLDER_PATH`: the location of the file which serves as webhook access point; this file has to be in the localhost folder (for XAMPP is "`.../xampp/htdocs/`", for example)
-- `-t TELEGRAM_BOT_TOKEN`: the Telegram Bot API token
-- `-c CUSTOM_CONFIG_FILE`: a custom configuration file to easily start scripts
+The script accepts the following command-line arguments:
+- `-f LOCAL_FOLDER_PATH`: the path to the file that acts as the Webhook endpoint. This file must be within your localhost folder (for example, in XAMPP, it's `.../xampp/htdocs/`)
+- `-t TELEGRAM_BOT_TOKEN`: your Telegram Bot API token
+- `-c CUSTOM_CONFIG_FILE`: path to a custom configuration file to easily reuse settings
 
-If you use a `-c`, the other parameters will be taken from the configuration file. Otherwise you need to specify `-f` and `-t`.
+If you use `-c`, the other parameters (`-f` and `-t`) will be read from the configuration file. Otherwise, they must be specified manually.
 
 ---
 ### Configuration file
@@ -49,9 +56,35 @@ You can create custom configuration files with the following structure:
   "telegram_bot_token": "238423979837589fwe8ydys7s7tyr78"
 }
 ```
-
-And then use it:
+Then, run the script like this:
 ```sh
 py auto_ngrok.py -c crypto_bot_config
 ```
 
+---
+### Optional: run the script globally from the terminal
+By default, you need to refer to the full script path every time (e.g. `C:\Users\username\Desktop\ngrok-for-testing-telegram-bot\`).
+To avoid this, you can make it callable globally depending on your OS. Below are two ways to do that in Linux and Windows (other alternatives exist).
+
+#### Linux
+You can remove the `.py` to `auto_ngrok.py`, then make the script executable:
+```sh
+chmod +x auto_ngrok
+```
+Then, create a symbolic link to the script:
+```sh
+ln -s ~/original/path/auto_ngrok ~/.local/bin/auto_ngrok
+```
+The `~/.local/bin` folder is usually included in your system’s PATH.
+
+
+#### Windows
+In Windows, add the script folder (e.g. `C:\Users\username\Desktop\ngrok-for-testing-telegram-bot\`) to the system's Path environment variable.
+Then create a batch file `ngrok-bot-start.bat` as follows:
+```bat
+@echo off
+set script_dir=%~dp0
+py "%script_dir%auto_ngrok.py" %*
+pause
+```
+This allows you to run `ngrok-bot-start` from anywhere in the terminal.

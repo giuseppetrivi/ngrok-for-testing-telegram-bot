@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from pyngrok import conf, ngrok
 from Webhook import Webhook
 import argparse
