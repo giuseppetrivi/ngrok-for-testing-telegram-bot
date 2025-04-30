@@ -35,7 +35,7 @@ py auto_ngrok.py ...
 ```
 
 The script accepts the following arguments on the command line:
-- `-f LOCAL_FOLDER_PATH`: the location of the file which serves as webhook access point; this file has to be in the localhost folder (for XAMPP is "`.../xampp/htdocs/BOT_FOLDER/ENTRY_FILE.php`", for example)
+- `-f LOCAL_FOLDER_PATH`: the location of the file which serves as webhook access point; this file has to be in the localhost folder (for XAMPP is "`.../xampp/htdocs/`", for example)
 - `-t TELEGRAM_BOT_TOKEN`: the Telegram Bot API token
 - `-c CUSTOM_CONFIG_FILE`: a custom configuration file to easily start scripts
 
