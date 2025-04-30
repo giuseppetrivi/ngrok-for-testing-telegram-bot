@@ -18,15 +18,6 @@ def isPathValid(str_path):
     return False
   return True
 
-# Function to check the validity of a Telegram bot token
-def isBotTokenValid(token):
-  if (token==None):
-    return False
-  
-  if (not len(token)==46):
-    return False
-  return True
-
 
 
 ####################################
@@ -62,11 +53,13 @@ if (custom_config_file != None):
   telegram_bot_token = config_data["telegram_bot_token"]
 
   if (not isPathValid(ngrok_config_file_path) or not isPathValid(local_folder_path) or not Webhook.isBotTokenValid(telegram_bot_token)):
-    Exception("[ERROR]: Something wrong in the definition of properties in custom config file")
+    print("[ERROR]: Something wrong in the definition of properties in custom config file")
+    exit(1)
 else:
   if (not isPathValid(local_folder_path) or not Webhook.isBotTokenValid(telegram_bot_token)):
-    Exception("[ERROR]: Something wrong in the definition of arguments. Valid combinations" \
-    " of arguments ar \"-c ..\" and \"-f .. -t ..\"")
+    print("[ERROR]: Something wrong in the definition of arguments. Valid combinations" \
+    " of arguments are \"-c ..\" and \"-f .. -t ..\"")
+    exit(1)
 
 
 
