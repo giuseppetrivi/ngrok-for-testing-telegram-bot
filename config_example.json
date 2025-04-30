@@ -1,0 +1,5 @@
+{
+  "ngrok_config_file_path": "C:/path/to/ngrok/config/folder/ngrok.yml",
+  "local_folder_path": "/path/to/local/folder/with/code/index.php",
+  "telegram_bot_token": "telegrambottoken123456789"
+}
