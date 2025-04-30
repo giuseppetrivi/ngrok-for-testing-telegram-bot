@@ -23,9 +23,7 @@ This are all the (easy and common) prerequisites to start the script:
 After fulfilling the above prerequisites, you need to place the `ngrok.yml` file in the ngrok configuration folder, which may vary depending on the OS on which it is installed ([info here](https://ngrok.com/docs/agent/config/)). Then you need to insert the path to the file on line 47 of `auto_ngrok.py`:
 ```py
 ...
-
-ngrok_config_file_path = "Here/The/Path/ngrok.yml"   # Change this with the default folder path of ngrok.yml file
-
+ngrok_config_file_path = "Here/The/Path/ngrok.yml" 
 ...
 ```
 
