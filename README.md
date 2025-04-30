@@ -1,6 +1,6 @@
 # 🤖 ngrok-for-testing-telegram-bot
 
-## What is this script
+## ❓ What is this script
 To develop or test a Telegram bot, you need to set a Webhook (via the Telegram API) that points to a publicly accessible file on the web.  
 This means you can't develop a Telegram bot locally unless you expose your local folder to the web securely.
 
@@ -10,7 +10,7 @@ This script automates the process of creating an ngrok tunnel and updating the T
 Related article (in Italian) [here](https://giuseppetrivi.github.io/posts/testare-bot-telegram-in-locale-con-ngrok/) (use browser translation if needed).
 
 ---
-## What to do
+## 🛠️ What to do
 
 ### Prerequisites
 These are all the (easy and common) prerequisites to run the script:
@@ -67,14 +67,14 @@ py auto_ngrok.py -c crypto_bot_config
 ```
 
 ---
-### Optional: run the script globally from the terminal
+## 💡 Optional: run the script globally from the terminal
 By default, you need to refer to the full script path every time (e.g. `C:\Users\username\Desktop\ngrok-for-testing-telegram-bot\`).
 To avoid this, you can make it callable globally depending on your OS. Below are two ways to do that in Linux and Windows (other alternatives exist), to execute from anywhere in the terminal the script like this:
 ```sh
 auto_ngrok ...
 ```
 
-#### Linux
+### Linux
 You can remove the `.py` to `auto_ngrok.py`, then make the script executable:
 ```sh
 chmod +x auto_ngrok
@@ -86,7 +86,7 @@ ln -s ~/original/path/auto_ngrok ~/.local/bin/auto_ngrok
 The `~/.local/bin` folder is usually included in your system’s PATH.
 
 
-#### Windows
+### Windows
 In Windows, add the script folder (e.g. `C:\Users\username\Desktop\ngrok-for-testing-telegram-bot\`) to the system's Path environment variable.
 Then create a batch file `auto_ngrok.bat` as follows:
 ```bat
