@@ -27,7 +27,9 @@ These are all the (easy and common) prerequisites to run the script:
 Once the prerequisites are met, place the `ngrok.yml` configuration file in the ngrok config folder (its location depends on your OS — [more info here](https://ngrok.com/docs/agent/config/)). You need also to put your authtoken into this file (you can find it into your ngrok account, under "Your Authtoken" in the menu):
 
 ```yml
+...
 authtoken: <YOUR NGROK AUTH TOKEN>
+...
 ```
 
 Then, specify the path to that config file on line 47 of `auto_ngrok.py`:
@@ -67,7 +69,10 @@ py auto_ngrok.py -c crypto_bot_config
 ---
 ### Optional: run the script globally from the terminal
 By default, you need to refer to the full script path every time (e.g. `C:\Users\username\Desktop\ngrok-for-testing-telegram-bot\`).
-To avoid this, you can make it callable globally depending on your OS. Below are two ways to do that in Linux and Windows (other alternatives exist).
+To avoid this, you can make it callable globally depending on your OS. Below are two ways to do that in Linux and Windows (other alternatives exist), to execute from anywhere in the terminal the script like this:
+```sh
+auto_ngrok ...
+```
 
 #### Linux
 You can remove the `.py` to `auto_ngrok.py`, then make the script executable:
@@ -83,11 +88,10 @@ The `~/.local/bin` folder is usually included in your system’s PATH.
 
 #### Windows
 In Windows, add the script folder (e.g. `C:\Users\username\Desktop\ngrok-for-testing-telegram-bot\`) to the system's Path environment variable.
-Then create a batch file `ngrok-bot-start.bat` as follows:
+Then create a batch file `auto_ngrok.bat` as follows:
 ```bat
 @echo off
 set script_dir=%~dp0
 py "%script_dir%auto_ngrok.py" %*
 pause
 ```
-This allows you to run `ngrok-bot-start` from anywhere in the terminal.
