@@ -37,7 +37,7 @@ The script accepts the following arguments on the command line:
 - `-t TELEGRAM_BOT_TOKEN`: the Telegram Bot API token
 - `-c CUSTOM_CONFIG_FILE`: a custom configuration file to easily start scripts
 
-If you use a `-c`, the other parameters will be taken from the configuration file. Otherwise yu need to specify `-f` and `-t`.
+If you use a `-c`, the other parameters will be taken from the configuration file. Otherwise you need to specify `-f` and `-t`.
 
 ---
 ### Configuration file
