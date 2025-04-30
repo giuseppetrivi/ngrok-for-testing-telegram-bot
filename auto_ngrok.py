@@ -60,10 +60,10 @@ if (custom_config_file != None):
   local_folder_path = config_data["local_folder_path"]
   telegram_bot_token = config_data["telegram_bot_token"]
 
-  if (not isPathValid(ngrok_config_file_path) or not isPathValid(local_folder_path) or not isBotTokenValid(telegram_bot_token)):
+  if (not isPathValid(ngrok_config_file_path) or not isPathValid(local_folder_path) or not Webhook.isBotTokenValid(telegram_bot_token)):
     Exception("[ERROR]: Something wrong in the definition of properties in custom config file")
 else:
-  if (not isPathValid(local_folder_path) or not isBotTokenValid(telegram_bot_token)):
+  if (not isPathValid(local_folder_path) or not Webhook.isBotTokenValid(telegram_bot_token)):
     Exception("[ERROR]: Something wrong in the definition of arguments. Valid combinations" \
     " of arguments ar \"-c ..\" and \"-f .. -t ..\"")
 

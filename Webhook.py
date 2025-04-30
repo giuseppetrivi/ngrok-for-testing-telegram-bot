@@ -6,52 +6,64 @@ import json
 # Class to handle the requests to the webhook
 class Webhook:
 
-  # Fill this var with a default Telegram bot token
-  tgBotApiToken = None # CHANGE WITH YOUR DEFAULT TELEGRAM BOT TOKEN
 
-  def __init__(self, tgBotApiToken=None):
-    if (tgBotApiToken!=None and len(tgBotApiToken)==46):
-      self.tgBotApiToken = tgBotApiToken
-    elif (tgBotApiToken==None):
-      print("[!! ERROR]: You should specify a Telegram bot token.")
+  telegram_bot_token = None
+
+
+  @staticmethod
+  # Function to check the validity of a Telegram bot token
+  def isBotTokenValid(token):
+    if (token==None):
+      return False
+    
+    if (not len(token)==46):
+      return False
+    return True
+
+
+  def __init__(self, telegram_bot_token=None):
+    if (Webhook.isBotTokenValid(telegram_bot_token)):
+      self.telegram_bot_token = telegram_bot_token
+    else:
+      print("[ERROR]: Telegram bot token not valid.")
       exit(1)
     pass
 
   # Method to make different requests to Telegram bot API
-  def makeRequestToApi(self, methodName, params=None):
-    url = "https://api.telegram.org/bot" + self.tgBotApiToken + "/" + methodName
+  def makeRequestToApi(self, method_name, params=None):
+    url = "https://api.telegram.org/bot" + self.telegram_bot_token + "/" + method_name
     request = requests.get(url, params)
     return request
 
   # Check if a ngrok URL is valid
-  def isUrlValid(self, ngrokPublicUrl):
+  def isUrlValid(self, ngrok_public_url):
     regex = r"https:\/\/[a-zA-Z0-9-]*.ngrok-free.app"
-    if (re.match(regex, ngrokPublicUrl)):
+    if (re.match(regex, ngrok_public_url)):
       return True
     else:
       return False
   
-
+  # Methods to handle webhook
   def deleteWebhook(self):
-    methodName = "deleteWebhook"
-    request = self.makeRequestToApi(methodName)
+    method_name = "deleteWebhook"
+    request = self.makeRequestToApi(method_name)
     if (request.status_code!=200):
       return False
     return json.loads(request.content)
   
-  def setWebhook(self, ngrokPublicUrlComplete):
-    methodName = "setWebhook"
+  def setWebhook(self, ngrok_public_url_complete):
+    method_name = "setWebhook"
     params = {
-      'url': ngrokPublicUrlComplete
+      'url': ngrok_public_url_complete
     }
-    request = self.makeRequestToApi(methodName, params)
+    request = self.makeRequestToApi(method_name, params)
     if (request.status_code!=200):
       return False
     return json.loads(request.content)
   
   def getWebhookInfo(self):
-    methodName = "getWebhookInfo"
-    request = self.makeRequestToApi(methodName)
+    method_name = "getWebhookInfo"
+    request = self.makeRequestToApi(method_name)
     if (request.status_code!=200):
       return False
     return json.loads(request.content)
