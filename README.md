@@ -23,7 +23,6 @@ These are all the (easy and common) prerequisites to run the script:
 - [Install the `pyngrok` Python library](https://pypi.org/project/pyngrok/)
 - Install a local server (like [XAMPP](https://www.apachefriends.org/it/index.html))
 
----
 ### Setup
 Once the prerequisites are met, place the `ngrok.yml` configuration file in the ngrok config folder (its location depends on your OS — [more info here](https://ngrok.com/docs/agent/config/)). You need also to put your authtoken into this file (you can find it into your ngrok account, under "Your Authtoken" in the menu):
 
