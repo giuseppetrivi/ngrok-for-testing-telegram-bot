@@ -48,7 +48,7 @@ If you use `-c`, the other parameters (`-f` and `-t`) will be read from the conf
 
 ---
 ### Configuration file
-You can create custom configuration files with the following structure:
+You can create custom configuration files with the following structure (for example `crypto_bot_testing.json`):
 ```json
 {
   "ngrok_config_file_path": "C:/path/to/ngrok/config/folder/ngrok.yml",
