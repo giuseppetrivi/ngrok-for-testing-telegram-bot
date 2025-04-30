@@ -1,6 +1,6 @@
 # 🤖 ngrok-for-testing-telegram-bot
 
-### What is this script
+## What is this script
 To develop or test a Telegram bot, you need to set a Webhook (via the Telegram API) that points to a publicly accessible file on the web.  
 This means you can't develop a Telegram bot locally unless you expose your local folder to the web securely.
 
@@ -10,6 +10,7 @@ This script automates the process of creating an ngrok tunnel and updating the T
 Related article (in Italian) [here](https://giuseppetrivi.github.io/posts/testare-bot-telegram-in-locale-con-ngrok/) (use browser translation if needed).
 
 ---
+## What to do
 
 ### Prerequisites
 These are all the (easy and common) prerequisites to run the script:
@@ -23,9 +24,12 @@ These are all the (easy and common) prerequisites to run the script:
 - Install a local server (like [XAMPP](https://www.apachefriends.org/it/index.html))
 
 ---
+### Setup
+Once the prerequisites are met, place the `ngrok.yml` configuration file in the ngrok config folder (its location depends on your OS — [more info here](https://ngrok.com/docs/agent/config/)). You need also to put your authtoken into this file (you can find it into your ngrok account, under "Your Authtoken" in the menu):
 
-### How it works
-Once the prerequisites are met, place the `ngrok.yml` configuration file in the ngrok config folder (its location depends on your OS — [more info here](https://ngrok.com/docs/agent/config/)).
+```yml
+authtoken: <YOUR NGROK AUTH TOKEN>
+```
 
 Then, specify the path to that config file on line 47 of `auto_ngrok.py`:
 ```py
@@ -39,14 +43,14 @@ Now you can run the script from the command line:
 py auto_ngrok.py ...
 ```
 
+### Arguments
 The script accepts the following command-line arguments:
 - `-f LOCAL_FOLDER_PATH`: the path to the file that acts as the Webhook endpoint. This file must be within your localhost folder (for example, in XAMPP, it's `.../xampp/htdocs/`)
 - `-t TELEGRAM_BOT_TOKEN`: your Telegram Bot API token
-- `-c CUSTOM_CONFIG_FILE`: path to a custom configuration file to easily reuse settings
+- `-c CUSTOM_CONFIG_FILE`: name of a custom configuration file to easily reuse settings
 
 If you use `-c`, the other parameters (`-f` and `-t`) will be read from the configuration file. Otherwise, they must be specified manually.
 
----
 ### Configuration file
 You can create custom configuration files with the following structure (for example `crypto_bot_config.json`):
 ```json
