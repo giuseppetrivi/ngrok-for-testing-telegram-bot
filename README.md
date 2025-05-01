@@ -1,11 +1,11 @@
 # 🤖 ngrok-for-testing-telegram-bot
 
 ## ❓ What is this script
-To develop or test a Telegram bot, you need to set a Webhook (via the Telegram API) that points to a publicly accessible file on the web.  
+To develop or test a Telegram bot, you need to set a webhook (via the Telegram API) that points to a publicly accessible file on the web.  
 This means you can't develop a Telegram bot locally unless you expose your local folder to the web securely.
 
-[**ngrok**](https://ngrok.com/) allows you to expose your localhost to the internet. It provides a temporary public domain pointing to your local server, which you can use to set up your bot's Webhook.  
-This script automates the process of creating an ngrok tunnel and updating the Telegram Webhook accordingly each time ngrok is started.
+[**ngrok**](https://ngrok.com/) allows you to expose your localhost to the internet. It provides a temporary public domain pointing to your local server, which you can use to set up your bot's webhook.  
+This script automates the process of creating an ngrok tunnel and updating the Telegram webhook accordingly each time ngrok is started.
 
 Related article (in Italian) [here](https://giuseppetrivi.github.io/posts/testare-bot-telegram-in-locale-con-ngrok/) (use browser translation if needed).
 
@@ -32,7 +32,7 @@ authtoken: <YOUR NGROK AUTH TOKEN>
 ...
 ```
 
-Then, specify the path to that config file on line 47 of `auto_ngrok.py`:
+Then, specify the path to that config file on line 40 of `auto_ngrok.py`:
 ```py
 ...
 ngrok_config_file_path = "/Here/The/Path/ngrok.yml"
@@ -46,7 +46,7 @@ py auto_ngrok.py ...
 
 ### Arguments
 The script accepts the following command-line arguments:
-- `-f LOCAL_FOLDER_PATH`: the path to the file that acts as the Webhook endpoint. This file must be within your localhost folder (for example, in XAMPP, it's `.../xampp/htdocs/`)
+- `-f LOCAL_FOLDER_PATH`: the path to the file that acts as the webhook endpoint. This file must be within your localhost folder (for example, in XAMPP, it's `.../xampp/htdocs/`)
 - `-t TELEGRAM_BOT_TOKEN`: your Telegram Bot API token
 - `-c CUSTOM_CONFIG_FILE`: name of a custom configuration file to easily reuse settings
 
