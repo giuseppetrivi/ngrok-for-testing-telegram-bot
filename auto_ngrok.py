@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pyngrok import conf, ngrok
 from Webhook import Webhook
+from pathlib import Path
 import argparse
 import json
 import sys
@@ -42,10 +43,12 @@ local_folder_path = args.local_folder_path
 telegram_bot_token = args.telegram_bot_token
 custom_config_file = args.custom_config_file
 
+
 # Checking arguments
 if (custom_config_file != None):
-  config_filename = custom_config_file + ".json"
-  with open(config_filename, 'r') as file:
+  script_path = Path(__file__).resolve().parent
+  config_filepath = script_path / (custom_config_file + ".json")
+  with open(config_filepath, 'r') as file:
     config_data = json.load(file)
 
   ngrok_config_file_path = config_data["ngrok_config_file_path"]
@@ -85,7 +88,7 @@ if (not webhook.isUrlValid(ngrok_public_url)):
   exit(1)
 
 ngrok_public_url_for_webhook = ngrok_public_url + local_folder_path
-print(ngrok_public_url_for_webhook)
+print("ngrok URL: ", ngrok_public_url_for_webhook)
 
 # Deleting the pre-existent webhook
 delete_webhook_info = webhook.deleteWebhook()
