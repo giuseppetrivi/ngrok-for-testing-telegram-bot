@@ -1,3 +1,4 @@
 ngrok-bot-start.bat
 
-general_testing_config.json
+config_files/*.json
+!config_files/config_example.json

@@ -47,7 +47,7 @@ custom_config_file = args.custom_config_file
 # Checking arguments
 if (custom_config_file != None):
   script_path = Path(__file__).resolve().parent
-  config_filepath = script_path / (custom_config_file + ".json")
+  config_filepath = script_path / "config_files" / (custom_config_file + ".json")
   with open(config_filepath, 'r') as file:
     config_data = json.load(file)
 
