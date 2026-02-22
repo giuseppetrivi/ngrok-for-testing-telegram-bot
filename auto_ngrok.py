@@ -8,6 +8,11 @@ import sys
 import re
 
 
+divisor_length = 70
+
+def print_error(message):
+  print("❌ [ERROR]: {message}")
+
 
 # Function to check the validity of a path
 def isPathValid(str_path):
@@ -18,7 +23,6 @@ def isPathValid(str_path):
   if (not re.match(regexToMatchFolderUri, str_path)):
     return False
   return True
-
 
 
 ####################################
@@ -56,11 +60,11 @@ if (custom_config_file != None):
   telegram_bot_token = config_data["telegram_bot_token"]
 
   if (not isPathValid(ngrok_config_file_path) or not isPathValid(local_folder_path) or not Webhook.isBotTokenValid(telegram_bot_token)):
-    print("[ERROR]: Something wrong in the definition of properties in custom config file")
+    print_error("Something wrong in the definition of properties in custom config file")
     exit(1)
 else:
   if (not isPathValid(local_folder_path) or not Webhook.isBotTokenValid(telegram_bot_token)):
-    print("[ERROR]: Something wrong in the definition of arguments. Valid combinations" \
+    print_error("Something wrong in the definition of arguments. Valid combinations" \
     " of arguments are \"-c ..\" and \"-f .. -t ..\"")
     exit(1)
 
@@ -72,7 +76,7 @@ conf.get_default().config_path = ngrok_config_file_path
 # Create ngrok tunnel
 ngrok_created_tunnel = ngrok.connect()
 if (ngrok_created_tunnel is None):
-  print("[ERROR]: Something wrong during the creation of ngrok tunnel.")
+  print_error("Something wrong during the creation of ngrok tunnel.")
   exit(1)
 
 # Info from created ngrok tunnel
@@ -84,7 +88,7 @@ config = ngrok_created_tunnel.config
 ## Handle the webhook (operations to reset the webhook: delete the pre-existent, setting the new one and getting info of the new one)
 webhook = Webhook(telegram_bot_token)
 if (not webhook.isUrlValid(ngrok_public_url)):
-  print("[ERROR]: ngrok URL is not valid.")
+  print_error("ngrok URL is not valid.")
   exit(1)
 
 ngrok_public_url_for_webhook = ngrok_public_url + local_folder_path
@@ -93,45 +97,50 @@ print("ngrok URL: ", ngrok_public_url_for_webhook)
 # Deleting the pre-existent webhook
 delete_webhook_info = webhook.deleteWebhook()
 if (delete_webhook_info):
-  print("## Delete webhook: info ##")
+  print("\n" + "="*divisor_length)
+  print(f"{'ℹ️ Delete webhook info':^60}")
+  print("="*divisor_length)
   print(json.dumps(delete_webhook_info, indent=2))
 else:
-  print("[ERROR]: Something wrong while deleting the webhook.")
+  print_error("Something wrong while deleting the webhook.")
   exit(1)
 
 # Setting the new webhook (with ngrok public url)
 set_webhook_info = webhook.setWebhook(ngrok_public_url_for_webhook)
 if (set_webhook_info):
-  print("## Set new webhook: info ##")
+  print("\n" + "="*divisor_length)
+  print(f"{'ℹ️ Set webhook info':^60}")
+  print("="*divisor_length)
   print(json.dumps(set_webhook_info, indent=2))
 else:
-  print("[ERROR]: Something wrong while setting the new webhook.")
+  print_error("Something wrong while setting the new webhook.")
   exit(1)
 
 # Getting info of new webhook created
 general_webhook_info = webhook.getWebhookInfo()
 if (general_webhook_info):
-  print("## General webhook info ##")
+  print("\n" + "="*divisor_length)
+  print(f"{'ℹ️ General webhook info':^60}")
+  print("="*divisor_length)
   print(json.dumps(general_webhook_info, indent=2))
 else:
-  print("[ERROR]: Something wrong while getting the new webhook info.")
+  print_error("Something wrong while getting the new webhook info.")
   exit(1)
 
-
-
 # Print info about ngrok tunnel
-print()
-print()
-print("Info about the ngrok tunnel")
-print(f"\tPublic URL: {ngrok_public_url}")
-print(f"\tProtocol: {protocol}")
-print(f"\tTunnel name: {name}")
-print(f"\tTunnel configuration: \n{json.dumps(config, indent=9)}")
-print()
+print("\n" + "="*divisor_length)
+print(f"{'🔗 Info ngrok tunnel':^60}")
+print("="*70)
+print(f"  Public URL:        {ngrok_public_url}")
+print(f"  Protocol:          {protocol}")
+print(f"  Tunnel name:       {name}")
+print(f"  Configuration:     {json.dumps(config)}")
+print(f"  Inspect requests:  http://localhost:4040/inspect/http")
+print("="*divisor_length)
 
 # ngrok process
 ngrok_process = ngrok.get_ngrok_process()
-print("!! Remind to activate your localhost server (XAMPP or whatelse) !!")
+print("\n⚠️  Remind to activate your localhost server (XAMPP or whatelse)!")
 print("Press CTRL+C to stop ngrok tunneling")
 try:
   # Block until CTRL-C or some other terminating event
