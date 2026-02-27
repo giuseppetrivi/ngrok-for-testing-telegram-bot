@@ -11,7 +11,7 @@ import re
 divisor_length = 70
 
 def print_error(message):
-  print("❌ [ERROR]: {message}")
+  print(f"❌ [ERROR]: {message}")
 
 
 # Function to check the validity of a path
